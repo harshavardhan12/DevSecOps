@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    environment {
+        SONARQUBE = 'SonarQube' // Name of SonarQube server config
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    // Your build steps here
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Run SonarQube Scanner for analysis
+                    withSonarQubeEnv('SonarQube') {
+                        sh 'mvn clean install sonar:sonar'
+                    }
+                }
+            }
+        }
+    }
+}
