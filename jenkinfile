@@ -54,9 +54,11 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker build --build-arg TMDB_V3_API_KEY=6ecb888bbfab136100cbca2efd0bf7e0 -t harsha/netflix:latest ."
-                       
-                       sh "docker push harsha/netflix:latest "
+                       sh "docker build --build-arg TMDB_V3_API_KEY=6ecb888bbfab136100cbca2efd0bf7e0 -t harsha/netflix ."
+                       sh "docker tag harsha/netflix:latest harsha/netflix:latest"
+
+                       sh "docker push harsha/netflix:latest"
+
                        
 
                     }
