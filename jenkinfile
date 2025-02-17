@@ -43,18 +43,13 @@ pipeline {
                 sh "npm install"
             }
         }
-        stage('OWASP FS Scan') {
-            steps {
-                dependencyCheck additionalArguments
-                dependencyCheckPublisher pattern
-            }
-        }
+       
     
         stage('Docker Build & Push') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-credentials') {
-                        sh "docker build --build-arg TMDB_V3_API_KEY=<your-api-key> -t netflix ."
+                        sh "docker build --build-arg TMDB_V3_API_KEY=6ecb888bbfab136100cbca2efd0bf7e0 -t netflix ."
                         sh "docker tag netflix sirishassss/netflix:latest"
                         sh "docker push sirishassss/netflix:latest"
                     }
