@@ -39,19 +39,10 @@ pipeline{
             }
         }
        
-        stage('TRIVY FS SCAN') {
-            steps {
-                sh "trivy fs . > trivyfs.txt"
-            }
-        }
-       
-        stage("TRIVY"){
-            steps{
-                sh "trivy image harsha/netflix:latest > trivyimage.txt" 
-            }
-        }
+        
        
 
     }
-    
 }
+    
+
