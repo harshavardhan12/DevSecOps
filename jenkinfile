@@ -55,8 +55,7 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build --build-arg TMDB_V3_API_KEY=6ecb888bbfab136100cbca2efd0bf7e0 -t netflix ."
-                       sh "docker tag netflix cyberseccloud/netfloix:latest"
-                       sh "docker push cyberseccloud/netflix:latest"
+                       sh "docker push netflix"
                        
 
                     }
@@ -72,7 +71,7 @@ pipeline{
 
         stage('Deploy to container'){
             steps{
-                sh "docker run -d --name netflix -p 8081:80 cyberseccloud/netflix:latest"
+                sh "docker run -d --name netflix -p 8081:80 netflix:latest"
             }
         }
 
