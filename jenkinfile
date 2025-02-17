@@ -27,7 +27,8 @@ pipeline {
                withSonarQubeEnv('sonar-server') {
                  
                     sh ''' 
-                    $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=Netflix -Dsonar.login=$SONAR_TOKEN
+                    $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix \
+                    -Dsonar.projectkey=harshasonar'''
                     '''
                 }
             }
