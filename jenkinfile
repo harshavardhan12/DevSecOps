@@ -6,6 +6,8 @@ pipeline{
     }
     environment {
         SCANNER_HOME=tool 'sonar-scanner'
+        DOCKER_IMAGE = "harshavardhan/netflix:latest"
+        
     }
     stages {
         stage('clean workspace'){
@@ -54,7 +56,7 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build --build-arg TMDB_V3_API_KEY=6ecb888bbfab136100cbca2efd0bf7e0 -t netflix ."
-                       sh "docker push netflix:latest "
+                       sh "docker push $DOCKER_IMAGE "
                     }
                 }
             }
@@ -68,7 +70,7 @@ pipeline{
 
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d -p 8081:80 netflix:latest'
+                sh 'docker run -d -p 8081:80 $DOCKER_IMAGE'
             }
         }
 
