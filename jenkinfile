@@ -24,11 +24,12 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
+               withSonarQubeEnv('sonar-server') {
                  
                     sh ''' 
-                    $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=Netflix
+                    $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=Netflix -Dsonar.login=$SONAR_TOKEN
                     '''
-                
+                }
             }
         }
         stage('Quality Gate') {
